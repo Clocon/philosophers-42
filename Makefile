@@ -6,7 +6,7 @@
 #    By: lumorale <lumorale@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/20 13:19:05 by lumorale          #+#    #+#              #
-#    Updated: 2023/04/17 13:22:02 by lumorale         ###   ########.fr        #
+#    Updated: 2023/04/21 11:58:46 by lumorale         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,8 @@ AR				=	ar -rcs
 
 SRCS			=	src/philo.c \
 					src/freerror.c \
+					src/timer.c \
+					src/threads.c \
 					
 					
 
