@@ -6,7 +6,7 @@
 /*   By: lumorale <lumorale@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 13:51:53 by lumorale          #+#    #+#             */
-/*   Updated: 2023/04/21 17:31:50 by lumorale         ###   ########.fr       */
+/*   Updated: 2023/04/24 18:05:37 by lumorale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ typedef struct s_philo
 	int				r_fork;
 	int				last_dinner;
 	int				t_seaten;
-
 }	t_philo;
 
 typedef struct s_action
@@ -43,7 +42,7 @@ typedef struct s_action
 	int				n_eat;
 	int				is_dead;
 	int				time_start;
-	int				times_eaten;
+//	int				times_eaten;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	init;
 	t_philo			*philo;
