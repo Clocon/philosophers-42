@@ -6,7 +6,7 @@
 /*   By: lumorale <lumorale@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 11:59:49 by lumorale          #+#    #+#             */
-/*   Updated: 2023/04/27 12:07:23 by lumorale         ###   ########.fr       */
+/*   Updated: 2023/04/28 17:48:24 by lumorale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 int	ft_atoi(char *nptr)
 {
-	int	i;
-	int	pol;
-	int	toint;
+	int		i;
+	int		pol;
+	long	toint;
 
 	i = 0;
 	pol = 1;
@@ -29,13 +29,25 @@ int	ft_atoi(char *nptr)
 		i++;
 	while (nptr[i] >= '0' && nptr[i] <= '9')
 		toint = toint * 10 + (nptr[i++] - 48);
-	return (toint * pol);
+	if (toint > 2147483647)
+		return (-1);
+	toint *= pol;
+	return ((int)toint);
 }
 
-int	ft_isdigit(int c)
+int	ft_isdigit(char *s)
 {
-	if (c < '0' || c > '9')
-		return (0);
+	int	i;
+
+	i = 0;
+	if (s[0] == '+' || s[0] == '-')
+		i++;
+	while (s[i])
+	{
+		if (s[i] < '0' || s[i] > '9')
+			return (0);
+		i++;
+	}
 	return (1);
 }
 

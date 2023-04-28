@@ -6,7 +6,7 @@
 /*   By: lumorale <lumorale@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 12:26:21 by lumorale          #+#    #+#             */
-/*   Updated: 2023/04/28 17:02:21 by lumorale         ###   ########.fr       */
+/*   Updated: 2023/04/28 17:52:56 by lumorale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,12 @@
 
 static int	check_actions(char *str)
 {
-	int	i;
 	int	nb;
 
-	i = -1;
-	while (str[++i])
-	{
-		if (!ft_isdigit(str[i]))
-			error("It's not a numeric character\n", 1);
-	}
+	if (!ft_isdigit(str))
+		error("It's not a numeric character\n", 1);
 	nb = ft_atoi(str);
-	if (nb > 2147483647 || nb < 0)
+	if (nb < 0)
 		error("Arguments can't be lower than 0 and care with MAX_INT\n", 1);
 	return (nb);
 }

@@ -6,7 +6,7 @@
 /*   By: lumorale <lumorale@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 13:51:53 by lumorale          #+#    #+#             */
-/*   Updated: 2023/04/28 17:01:43 by lumorale         ###   ########.fr       */
+/*   Updated: 2023/04/28 17:25:59 by lumorale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	*go_die(void *ph);
 
 /*Functions for threads.c*/
 int		ft_atoi(char *nptr);
-int		ft_isdigit(int c);
+int		ft_isdigit(char *s);
 void	ft_putstr_fd(char *s, int fd);
 
 #endif
