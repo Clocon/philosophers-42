@@ -6,18 +6,26 @@
 /*   By: lumorale <lumorale@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 12:26:21 by lumorale          #+#    #+#             */
-/*   Updated: 2023/04/24 17:32:58 by lumorale         ###   ########.fr       */
+/*   Updated: 2023/04/28 17:02:21 by lumorale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-static int	check_actions(int nb, int philos)
+static int	check_actions(char *str)
 {
-	if ((nb > 2147483647 || nb < 0) && philos == 0)
-		error("Arguments can't be lower than 0\n", 1);
-	else if ((nb > 2147483647 || nb < 2) && philos == 1)
-		error("I need more than 1 philos! and care with MAX_INT\n", 1);
+	int	i;
+	int	nb;
+
+	i = -1;
+	while (str[++i])
+	{
+		if (!ft_isdigit(str[i]))
+			error("It's not a numeric character\n", 1);
+	}
+	nb = ft_atoi(str);
+	if (nb > 2147483647 || nb < 0)
+		error("Arguments can't be lower than 0 and care with MAX_INT\n", 1);
 	return (nb);
 }
 
@@ -25,12 +33,12 @@ static void	action_init(t_action *acts, char **argv, int argc)
 {
 	if (argc > 4)
 	{
-		acts->n_philo = check_actions(ft_atoi(argv[0]), 1);
-		acts->to_die = check_actions(ft_atoi(argv[1]), 0);
-		acts->to_eat = check_actions(ft_atoi(argv[2]), 0);
-		acts->to_sleep = check_actions(ft_atoi(argv[3]), 0);
+		acts->n_philo = check_actions(argv[0]);
+		acts->to_die = check_actions(argv[1]);
+		acts->to_eat = check_actions(argv[2]);
+		acts->to_sleep = check_actions(argv[3]);
 		if (argv[4])
-			acts->n_eat = check_actions(ft_atoi(argv[4]), 0);
+			acts->n_eat = check_actions(argv[4]);
 		else
 			acts->n_eat = -1;
 		acts->is_dead = 0;
@@ -68,35 +76,29 @@ void	philos_init(t_action *acts)
 	if (!acts->philo)
 		error("Philos memory allocated failed\n", 1);
 	i = -1;
+	if (pthread_create(&acts->thread, 0, go_die, acts))
+		error("Fail creating thread\n", 1);
 	while (++i < acts->n_philo)
 	{
 		acts->philo[i].act = acts;
 		acts->philo[i].last_dinner = 0;
-		acts->philo[i].t_seaten = 0;
+		acts->philo[i].eat_counter = 0;
+		acts->philo[i].id = i + 1;
+		acts->philo[i].i_eat = 0;
 		if (pthread_create(&acts->philo[i].philo, 0, thread_init,
 				&acts->philo[i]))
-			error("Fail creating philo\n", 1);
-		acts->philo[i].id = i + 1;
-		if (pthread_create(&acts->thread, 0, go_die, acts))
 			error("Fail creating philo\n", 1);
 	}
 }
 
-void	leaks(void)
-{
-	system("leaks -q philo");
-}
-
 int	main(int argc, char **argv)
 {
-	atexit(leaks);
-	t_action	acts;	
+	t_action	acts;
 
-	if (argc >6 || argc < 5)
+	if (argc > 6 || argc < 5)
 		error("Invalid number of arguments", 1);
 	action_init(&acts, &argv[1], argc);
 	acts.time_start = timer();
-	ft_printf("TIME = %d\n", acts.time_start);
 	if (pthread_mutex_init(&acts.init, 0))
 		error("Creating mutex failed\n", 1);
 	fork_generator(&acts);

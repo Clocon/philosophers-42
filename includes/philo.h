@@ -6,16 +6,16 @@
 /*   By: lumorale <lumorale@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 13:51:53 by lumorale          #+#    #+#             */
-/*   Updated: 2023/04/24 18:05:37 by lumorale         ###   ########.fr       */
+/*   Updated: 2023/04/28 17:01:43 by lumorale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
 
-# include "../libft/includes/libft.h"
-# include "../ft_printf/includes/ft_printf.h"
-# include "../get_next_line/includes/get_next_line.h"
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
 # include <pthread.h>
 # include <sys/time.h>
 
@@ -30,7 +30,8 @@ typedef struct s_philo
 	int				l_fork;
 	int				r_fork;
 	int				last_dinner;
-	int				t_seaten;
+	int				eat_counter;
+	int				i_eat;
 }	t_philo;
 
 typedef struct s_action
@@ -40,9 +41,8 @@ typedef struct s_action
 	int				to_eat;
 	int				to_sleep;
 	int				n_eat;
-	int				is_dead;
 	int				time_start;
-//	int				times_eaten;
+	int				is_dead;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	init;
 	t_philo			*philo;
@@ -61,6 +61,11 @@ void	to_sleep(t_action *acts, int time);
 
 /*Functions for threads.c*/
 void	*thread_init(void *ph);
-void	*go_die(void *ac);
+void	*go_die(void *ph);
+
+/*Functions for threads.c*/
+int		ft_atoi(char *nptr);
+int		ft_isdigit(int c);
+void	ft_putstr_fd(char *s, int fd);
 
 #endif
