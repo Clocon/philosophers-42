@@ -6,7 +6,7 @@
 /*   By: lumorale <lumorale@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 12:27:24 by lumorale          #+#    #+#             */
-/*   Updated: 2023/04/28 17:01:36 by lumorale         ###   ########.fr       */
+/*   Updated: 2023/05/02 11:32:05 by lumorale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,10 @@ void	total_free(t_action *acts)
 {
 	int	i;
 
-	printf("SOY CONCHA, ENTRO!\n");
 	i = -1;
 	while (++i < acts->n_philo)
 		pthread_mutex_destroy(&acts->forks[i]);
-	pthread_mutex_destroy(&acts->init);
+	free(acts->philo);
 	free(acts->forks);
-	if (acts->philo)
-		free(&acts->philo);
+	pthread_mutex_destroy(&acts->init);
 }

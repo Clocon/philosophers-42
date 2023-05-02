@@ -6,7 +6,7 @@
 #    By: lumorale <lumorale@student.42malaga.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/20 13:19:05 by lumorale          #+#    #+#              #
-#    Updated: 2023/04/27 12:06:25 by lumorale         ###   ########.fr        #
+#    Updated: 2023/05/01 17:13:11 by lumorale         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,12 +15,12 @@ NAME			=	philo
 CC				=	gcc
 CFLAGS			=	-Wall -Werror -Wextra
 RM				=	rm -f
-AR				=	ar -rcs
 
 SRCS			=	src/philo.c \
 					src/freerror.c \
 					src/timer.c \
-					src/threads.c \
+					src/thread_dead.c \
+					src/thread_eat.c \
 					src/utils.c \
 					
 					
@@ -43,8 +43,6 @@ $(NAME):		$(OBJS)
 				@$(CC) $(FLAGS) $(OBJS)   -o $(NAME)
 				@echo "\n$(CYELLOW)$(NAME) $(PURPLE)-> $(CGREEN) compiled$(CRESET)"
 
-bonus:			$(LIBFT) $(LINE)
-
 clean:
 				@$(RM) $(OBJS)
 				@$(RM) $(OBJS_B)
@@ -57,4 +55,4 @@ fclean:			clean
 
 re:				fclean all
 
-.PHONY:			all clean fclean re bonus
+.PHONY:			all clean fclean re

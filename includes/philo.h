@@ -6,7 +6,7 @@
 /*   By: lumorale <lumorale@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 13:51:53 by lumorale          #+#    #+#             */
-/*   Updated: 2023/04/28 17:25:59 by lumorale         ###   ########.fr       */
+/*   Updated: 2023/05/01 17:08:53 by lumorale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int		timer(void);
 int		timer_dif(t_action *acts);
 void	to_sleep(t_action *acts, int time);
 
-/*Functions for threads.c*/
+/*Functions for threads*/
 void	*thread_init(void *ph);
 void	*go_die(void *ph);
 

@@ -6,19 +6,21 @@
 /*   By: lumorale <lumorale@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 12:26:21 by lumorale          #+#    #+#             */
-/*   Updated: 2023/04/28 17:52:56 by lumorale         ###   ########.fr       */
+/*   Updated: 2023/05/02 11:34:48 by lumorale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-static int	check_actions(char *str)
+static int	check_actions(char *str, int philo)
 {
 	int	nb;
 
 	if (!ft_isdigit(str))
 		error("It's not a numeric character\n", 1);
 	nb = ft_atoi(str);
+	if (nb <= 0 && philo == 1)
+		error("There are no philosophers\n", 1);
 	if (nb < 0)
 		error("Arguments can't be lower than 0 and care with MAX_INT\n", 1);
 	return (nb);
@@ -28,12 +30,12 @@ static void	action_init(t_action *acts, char **argv, int argc)
 {
 	if (argc > 4)
 	{
-		acts->n_philo = check_actions(argv[0]);
-		acts->to_die = check_actions(argv[1]);
-		acts->to_eat = check_actions(argv[2]);
-		acts->to_sleep = check_actions(argv[3]);
+		acts->n_philo = check_actions(argv[0], 1);
+		acts->to_die = check_actions(argv[1], 0);
+		acts->to_eat = check_actions(argv[2], 0);
+		acts->to_sleep = check_actions(argv[3], 0);
 		if (argv[4])
-			acts->n_eat = check_actions(argv[4]);
+			acts->n_eat = check_actions(argv[4], 0);
 		else
 			acts->n_eat = -1;
 		acts->is_dead = 0;
@@ -99,5 +101,6 @@ int	main(int argc, char **argv)
 	fork_generator(&acts);
 	philos_init(&acts);
 	pthread_join(acts.thread, 0);
+	total_free(&acts);
 	exit(0);
 }
