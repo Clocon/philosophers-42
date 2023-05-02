@@ -88,4 +88,4 @@ Try running these possible fixes :
 - **[get_next_line](../../../get_next_line-42)**
 - **[pipex](../../../pipex-42)**
 - **[push_swap](../../../push_swap-42)**
-- **[so_long](../../../push_swap-42)**
+- **[so_long](../../../so_long-42)**
